@@ -1,0 +1,180 @@
+package com.usercar.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.usercar.dao.CarDAO;
+import com.usercar.dao.CarPucDAO;
+import com.usercar.dao.CarServicingDAO;
+import com.usercar.dao.TripDAO;
+import com.usercar.model.Car;
+import com.usercar.model.CarPuc;
+import com.usercar.model.CarServicing;
+import com.usercar.model.CarSummary;
+import com.usercar.model.Trip;
+import com.usercar.model.UserCarRes;
+import com.usercar.utlity.PasswordHash;
+
+@Service
+public class CarService {
+	
+	@Autowired
+	private CarDAO cardao;
+	@Autowired
+	private CarServicingDAO carservdao;
+	@Autowired
+	private CarPucDAO carpucdao;
+	@Autowired
+	private TripDAO cartrip;
+	
+	@Autowired
+	private PasswordHash passwordhash;
+	public boolean verifyuser(String carno,String token)
+	{
+		try {
+			
+		
+		Car car;
+		if((car= cardao.findById(carno).orElse(null))!=null)
+		{
+			if(passwordhash.hash(car.getOwnerno()).equals(token))
+			{
+				return true;
+			}
+			else
+				return false;
+			
+		}
+		else
+		{
+			return false;
+		}
+		}
+		catch(Exception e)
+		{
+			return false;
+		}
+	}
+	
+	public UserCarRes addCar(String token,Car car)
+	{
+		try {
+			
+		
+		
+		if(verifyuser(car.getOwnerno(),token))
+		{
+			cardao.save(car);
+			return new UserCarRes(11,true,"Car Added");
+			
+		}
+		else
+		{
+			return new UserCarRes(0,false,"invalid token");
+		}
+		}
+		catch(Exception e)
+		{
+			return new UserCarRes(0,false,"internal error");
+		}
+	}
+	
+	public UserCarRes addCarService(String token,String carno, CarServicing car)
+	{
+		try {
+			
+		
+		
+		if(verifyuser(carno,token))
+		{
+			carservdao.save(car);
+			return new UserCarRes(11,true,"Car Servicing Added");
+			
+		}
+		else
+		{
+			return new UserCarRes(0,false,"invalid token");
+		}
+		}
+		catch(Exception e)
+		{
+			return new UserCarRes(0,false,"internal error");
+		}
+		
+	}
+	
+	public UserCarRes addCarPuc(String token,String carno, CarPuc car)
+	{
+		try {
+		if(verifyuser(carno,token))
+		{
+			carpucdao.save(car);
+			return new UserCarRes(11,true,"Car Servicing Added");
+			
+		}
+		else
+		{
+			return new UserCarRes(0,false,"invalid token");
+		}
+		}
+		catch(Exception e)
+		{
+			return new UserCarRes(0,false,"internal error");
+		}
+		
+	}
+	
+	public UserCarRes addCarTrip(String token,String carno, Trip trip)
+	{
+		try {
+		if(verifyuser(carno,token))
+		{
+			cartrip.save(trip);
+			return new UserCarRes(11,true,"Car Servicing Added");
+			
+		}
+		else
+		{
+			return new UserCarRes(0,false,"invalid token");
+		}
+		}
+		catch(Exception e)
+		{
+			return new UserCarRes(0,false,"internal error");
+		}
+		
+	}
+	public CarSummary viewCar(String token,String carno)
+	{
+		try {
+			if(verifyuser(carno,token))
+			{
+				CarSummary cs=new CarSummary();
+				cs.setCar(cardao.findById(carno).orElse(null));
+				cs.setTriplist(cartrip.findAllByCarno(carno));
+				cs.setCarserv(carservdao.findAllByCarno(carno));
+				cs.setPuclist(carpucdao.findAllByCarno(carno));
+				return cs;
+				
+			}
+			else
+			{
+				return new CarSummary();
+			}
+		}
+		catch(Exception e)
+		{
+			return new CarSummary();
+		}
+	}
+	public List<Car> viewCars()
+	{
+		return cardao.findAll();
+	}
+	
+	
+	
+	
+}
