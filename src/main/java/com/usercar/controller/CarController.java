@@ -47,9 +47,27 @@ public class CarController {
 	{
 		return new ResponseEntity<>(carservice.viewCar(token, carno),HttpStatus.OK);
 	}
+	
 	@RequestMapping(method=RequestMethod.GET,path="/viewallcars")
 	public ResponseEntity<?> viewAll(@RequestHeader(name="Authorization")String token)
 	{
 		return new ResponseEntity<>(carservice.viewCars(),HttpStatus.OK);
+	}
+		@RequestMapping(method=RequestMethod.GET,path="/viewservice/{carno}")
+	public ResponseEntity<?> viewService(@PathVariable("carno")String carno, @RequestHeader(name="Authorization")String token)
+	{
+		return new ResponseEntity<>(carservice.viewService(carno),HttpStatus.OK);
+	}
+	
+	@RequestMapping(method=RequestMethod.GET,path="/viewpuc/{carno}")
+	public ResponseEntity<?> viewPuc(@PathVariable("carno")String carno, @RequestHeader(name="Authorization")String token)
+	{
+		return new ResponseEntity<>(carservice.viewPuc(carno),HttpStatus.OK);
+	}
+	
+	@RequestMapping(method=RequestMethod.GET,path="/viewtrip/{carno}")
+	public ResponseEntity<?> viewTrip(@PathVariable("carno")String carno, @RequestHeader(name="Authorization")String token)
+	{
+		return new ResponseEntity<>(carservice.viewTrip(carno),HttpStatus.OK);
 	}
 }
