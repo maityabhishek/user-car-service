@@ -174,7 +174,17 @@ public class CarService {
 		return cardao.findAll();
 	}
 	
-	
+	public List<CarServicing> viewService(String carno) {
+		return carservdao.findAllByCarno(carno);
+	}
+
+	public List<CarPuc> viewPuc(String carno) {
+		return carpucdao.findAllByCarno(carno);
+	}
+
+	public List<Trip> viewTrip(String carno) {
+		return cartrip.findAllByCarno(carno);
+	}
 	
 	
 }
