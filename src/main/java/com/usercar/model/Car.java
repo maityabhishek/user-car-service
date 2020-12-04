@@ -14,6 +14,49 @@ public class Car {
 	private String model;
 	private String color;
 	private Date rcexp;
+	private int totalkms;
+	private double fuel;
+	private int enginestatus;
+	private int coolentstatus;
+	
+	public Car(String carno, String ownerno, String maker, String model, String color, Date rcexp, int totalkms,
+			double fuel, int enginestatus, int coolentstatus) {
+		super();
+		this.carno = carno;
+		this.ownerno = ownerno;
+		this.maker = maker;
+		this.model = model;
+		this.color = color;
+		this.rcexp = rcexp;
+		this.totalkms = totalkms;
+		this.fuel = fuel;
+		this.enginestatus = enginestatus;
+		this.coolentstatus = coolentstatus;
+	}
+	public int getTotalkms() {
+		return totalkms;
+	}
+	public void setTotalkms(int totalkms) {
+		this.totalkms = totalkms;
+	}
+	public double getFuel() {
+		return fuel;
+	}
+	public void setFuel(double fuel) {
+		this.fuel = fuel;
+	}
+	public int getEnginestatus() {
+		return enginestatus;
+	}
+	public void setEnginestatus(int enginestatus) {
+		this.enginestatus = enginestatus;
+	}
+	public int getCoolentstatus() {
+		return coolentstatus;
+	}
+	public void setCoolentstatus(int coolentstatus) {
+		this.coolentstatus = coolentstatus;
+	}
 	public String getCarno() {
 		return carno;
 	}
@@ -50,15 +93,7 @@ public class Car {
 	public void setRcexp(Date rcexp) {
 		this.rcexp = rcexp;
 	}
-	public Car(String carno, String ownerno, String maker, String model, String color, Date rcexp) {
-		super();
-		this.carno = carno;
-		this.ownerno = ownerno;
-		this.maker = maker;
-		this.model = model;
-		this.color = color;
-		this.rcexp = rcexp;
-	}
+
 	public Car() {
 		super();
 	}
