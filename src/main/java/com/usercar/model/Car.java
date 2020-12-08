@@ -9,6 +9,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Car {
 	@Id
 	private String carno;
+	private String vinno;
 	private String ownerno;
 	private String maker;
 	private String model;
@@ -19,10 +20,12 @@ public class Car {
 	private int enginestatus;
 	private int coolentstatus;
 	
-	public Car(String carno, String ownerno, String maker, String model, String color, Date rcexp, int totalkms,
-			double fuel, int enginestatus, int coolentstatus) {
+	
+	public Car(String carno, String vinno, String ownerno, String maker, String model, String color, Date rcexp,
+			int totalkms, double fuel, int enginestatus, int coolentstatus) {
 		super();
 		this.carno = carno;
+		this.vinno = vinno;
 		this.ownerno = ownerno;
 		this.maker = maker;
 		this.model = model;
@@ -32,6 +35,12 @@ public class Car {
 		this.fuel = fuel;
 		this.enginestatus = enginestatus;
 		this.coolentstatus = coolentstatus;
+	}
+	public String getVinno() {
+		return vinno;
+	}
+	public void setVinno(String vinno) {
+		this.vinno = vinno;
 	}
 	public int getTotalkms() {
 		return totalkms;

@@ -32,10 +32,10 @@ class cosmosdb
 	cosmosdb(TripDAO cartrip,CarPucDAO carpucdao,CarServicingDAO carservdao,CarDAO cardao) 
 	{
 		
-		cardao.save(new Car("OD02F7497","OD001","A","M","Black",new Date()));
-		carservdao.save(new CarServicing("OD02F7497", "PLG H", new Date(), "All Ok "));
-		carpucdao.save(new CarPuc("OD02F7497", new Date(), new Date(), "Bhubaneswar", "Active"));
-		cartrip.save(new Trip(1,"OD02F7497", 658.3, 30.2, 93.3, 7.1));
+		//cardao.save(new Car("OD02F7497","OD001","A","M","Black",new Date()));
+		//carservdao.save(new CarServicing("OD02F7497", "PLG H", new Date(), "All Ok "));
+		//carpucdao.save(new CarPuc("OD02F7497", new Date(), new Date(), "Bhubaneswar", "Active"));
+		cartrip.save(new Trip(2,"OD02F7497", 1658.3, 60.2, 93.3, 7.1,"Delhi","Pune"));
 	}
 }
 */

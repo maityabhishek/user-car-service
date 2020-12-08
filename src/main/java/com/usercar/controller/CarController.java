@@ -70,4 +70,9 @@ public class CarController {
 	{
 		return new ResponseEntity<>(carservice.viewTrip(carno),HttpStatus.OK);
 	}
+	@RequestMapping(method=RequestMethod.GET,path="/viewlasttrip/{carno}")
+	public ResponseEntity<?> viewLastTrip(@PathVariable("carno")String carno, @RequestHeader(name="Authorization")String token)
+	{
+		return new ResponseEntity<>(carservice.viewlastTrip(carno),HttpStatus.OK);
+	}
 }

@@ -185,6 +185,11 @@ public class CarService {
 	public List<Trip> viewTrip(String carno) {
 		return cartrip.findAllByCarno(carno);
 	}
+	public Trip viewlastTrip(String carno)
+	{
+		List<Trip> list= viewTrip(carno);
+		return cartrip.findByCarnoAndTripid(carno, list.size());
+	}
 	
 	
 }
