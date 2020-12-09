@@ -77,4 +77,17 @@ public class CarController {
 	{
 		return new ResponseEntity<>(carservice.viewlastTrip(carno),HttpStatus.OK);
 	}
+	
+	/**
+	 * This method retrieve analytics information
+	 * 
+	 * @param carno
+	 * @param token
+	 * @return
+	 */
+	@RequestMapping(method=RequestMethod.GET,path="/viewanalyticinfo/{carno}")
+	public ResponseEntity<?> viewAnalyticInfo(@PathVariable("carno")String carno, @RequestHeader(name="Authorization")String token)
+	{
+		return new ResponseEntity<>(carservice.viewAnalyticInfo(carno),HttpStatus.OK);
+	}
 }
