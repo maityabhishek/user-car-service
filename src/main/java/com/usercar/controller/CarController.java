@@ -44,7 +44,7 @@ public class CarController {
 	{
 		return new ResponseEntity<>(carservice.addCarTrip(token, carno, carTrip),HttpStatus.OK);
 	}
-	@RequestMapping(method=RequestMethod.GET,path="/viewca/{carno}")
+	@RequestMapping(method=RequestMethod.GET,path="/viewcar/{carno}")
 	public ResponseEntity<?> viewCar(@PathVariable("carno")String carno,@RequestHeader(name="Authorization")String token)
 	{
 		return new ResponseEntity<>(carservice.viewCar(token, carno),HttpStatus.OK);
