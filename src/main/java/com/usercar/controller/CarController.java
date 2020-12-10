@@ -2,6 +2,7 @@ package com.usercar.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -42,6 +43,7 @@ public class CarController {
 	{
 		return new ResponseEntity<>(carservice.addCarTrip(token, carno, carTrip),HttpStatus.OK);
 	}
+	@CrossOrigin(origins ="*")
 	@RequestMapping(method=RequestMethod.GET,path="/viewcar/{carno}")
 	public ResponseEntity<?> viewCar(@PathVariable("carno")String carno,@RequestHeader(name="Authorization")String token)
 	{
@@ -74,5 +76,18 @@ public class CarController {
 	public ResponseEntity<?> viewLastTrip(@PathVariable("carno")String carno, @RequestHeader(name="Authorization")String token)
 	{
 		return new ResponseEntity<>(carservice.viewlastTrip(carno),HttpStatus.OK);
+	}
+	
+	/**
+	 * This method retrieve analytics information
+	 * 
+	 * @param carno
+	 * @param token
+	 * @return
+	 */
+	@RequestMapping(method=RequestMethod.GET,path="/viewanalyticinfo/{carno}")
+	public ResponseEntity<?> viewAnalyticInfo(@PathVariable("carno")String carno, @RequestHeader(name="Authorization")String token)
+	{
+		return new ResponseEntity<>(carservice.viewAnalyticInfo(carno),HttpStatus.OK);
 	}
 }

@@ -191,5 +191,7 @@ public class CarService {
 		return cartrip.findByCarnoAndTripid(carno, list.size());
 	}
 	
-	
+	public AnalyticData viewAnalyticInfo(String carno) {
+		return null;
+	}
 }
