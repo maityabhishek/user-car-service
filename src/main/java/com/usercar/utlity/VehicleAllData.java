@@ -21,7 +21,7 @@ public class VehicleAllData implements CarDataGenerator {
 		HttpHeaders headers = new HttpHeaders();
 	    headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
 	    HttpEntity <String> entity = new HttpEntity<String>(headers);
-		String msgStr= res.exchange("http://localhost:8080/infoall", HttpMethod.GET, entity, String.class).getBody();
+		String msgStr= res.exchange("https://obdsimulator.azurewebsites.net/infoall", HttpMethod.GET, entity, String.class).getBody();
 		Message msg = new Message(msgStr);
 		System.out.println(msgStr);
 		return msg;
