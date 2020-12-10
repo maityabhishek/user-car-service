@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.usercar.service.IOTService;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:19006")
 public class IotController {
 	
 	@Autowired
