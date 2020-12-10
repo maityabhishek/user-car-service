@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import com.usercar.model.Car;
 import com.usercar.model.CarPuc;
@@ -18,7 +19,7 @@ import com.usercar.model.Trip;
 import com.usercar.service.CarService;
 
 @RestController
-@CrossOrigin(origins ="http://localhost:19006")
+@CrossOrigin(origins ="*")
 public class CarController {
 
 	@Autowired
