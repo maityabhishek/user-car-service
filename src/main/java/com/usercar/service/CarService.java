@@ -9,6 +9,7 @@ import com.usercar.dao.CarDAO;
 import com.usercar.dao.CarPucDAO;
 import com.usercar.dao.CarServicingDAO;
 import com.usercar.dao.TripDAO;
+import com.usercar.model.AnalyticData;
 import com.usercar.model.Car;
 import com.usercar.model.CarPuc;
 import com.usercar.model.CarServicing;
