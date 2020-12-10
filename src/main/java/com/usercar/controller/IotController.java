@@ -6,11 +6,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import com.usercar.service.IOTService;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:19006")
+@CrossOrigin(origins = "*")
 public class IotController {
 	
 	@Autowired
