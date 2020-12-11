@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import com.usercar.model.Car;
 import com.usercar.model.CarPuc;
@@ -18,6 +19,7 @@ import com.usercar.model.Trip;
 import com.usercar.service.CarService;
 
 @RestController
+@CrossOrigin(origins ="*")
 public class CarController {
 
 	@Autowired
@@ -43,7 +45,6 @@ public class CarController {
 	{
 		return new ResponseEntity<>(carservice.addCarTrip(token, carno, carTrip),HttpStatus.OK);
 	}
-	@CrossOrigin(origins ="*")
 	@RequestMapping(method=RequestMethod.GET,path="/viewcar/{carno}")
 	public ResponseEntity<?> viewCar(@PathVariable("carno")String carno,@RequestHeader(name="Authorization")String token)
 	{
