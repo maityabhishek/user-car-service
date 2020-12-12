@@ -15,8 +15,9 @@ public class IotController {
     @Autowired
     IOTService iotService;
 
-    @RequestMapping(path = "/senddata/trip", method = RequestMethod.GET)
-    public ResponseEntity<SimulationResponse> sendTripData() {
+    @RequestMapping(path = "/senddata/trip/{startPoint}/{endPoint}", method = RequestMethod.GET)
+    public ResponseEntity<SimulationResponse> sendTripData(@PathVariable("startPoint") String startPoint,
+                                                           @PathVariable("startPoint") String endPoint) {
         SimulationResponse response = new SimulationResponse();
         try {
             response.setSimulationId(iotService.connect(1));

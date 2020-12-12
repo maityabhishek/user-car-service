@@ -55,7 +55,7 @@ public class IOTSender {
 			double humidity = 0.0;
 			int i = 0;
 			// for (int i = 0; i < numRequests; ++i) {
-			while (!simulationEndKeeper.isSimulationEndRequested(simulationId) || MAX_SIMULATIONS <= i) {
+			while (!simulationEndKeeper.isSimulationEndRequested(simulationId) && MAX_SIMULATIONS > i) {
 				try {
 					Message msg = datagenerator.generateData();
 					msg.setContentTypeFinal("application/json");
@@ -73,7 +73,7 @@ public class IOTSender {
 				}
 			}
 
-			log.info("Number of messages sent to IOTHub - " + i);
+			log.info("Number of messages sent to DeviceClient - " + i);
 			System.out.println("Wait for " + D2C_MESSAGE_TIMEOUT / 1000 + " second(s) for response from the IoT Hub...");
 
 			// Wait for IoT Hub to respond.
