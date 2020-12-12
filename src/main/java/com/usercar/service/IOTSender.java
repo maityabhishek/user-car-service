@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import com.usercar.utlity.CarDataGenerator;
@@ -16,16 +18,18 @@ import com.microsoft.azure.sdk.iot.device.IotHubStatusCode;
 import com.microsoft.azure.sdk.iot.device.Message;
 import com.microsoft.azure.sdk.iot.device.transport.IotHubConnectionStatus;
 
-
+@RequiredArgsConstructor
 @Service
+@Slf4j
 public class IOTSender {
-	
-	
+
+	private static final int MAX_SIMULATIONS = 10000;
 	private static final int D2C_MESSAGE_TIMEOUT = 200000;   // 2 seconds
 	private static List failedMessageListOnClose = new ArrayList(); // List of messages that failed on close
-	public void sendMessageToIOTHUB(int numRequests ,DeviceClient client,CarDataGenerator datagenerator) {
-	
-	
+
+	private final SimulationEndKeeper simulationEndKeeper;
+
+	public void sendMessageToIOTHUB(int numRequests ,DeviceClient client,CarDataGenerator datagenerator, String simulationId) {
 
 	// Set your token expiry time limit here
 			long time = 240000;
@@ -49,26 +53,27 @@ public class IOTSender {
 			String deviceId = "giciotdevice";
 			double temperature = 0.0;
 			double humidity = 0.0;
-
-			for (int i = 0; i < numRequests; ++i) {
+			int i = 0;
+			// for (int i = 0; i < numRequests; ++i) {
+			while (!simulationEndKeeper.isSimulationEndRequested(simulationId) || MAX_SIMULATIONS <= i) {
 				try {
 					Message msg = datagenerator.generateData();
 					msg.setContentTypeFinal("application/json");
 					msg.setProperty("deviceid", deviceId);
-					msg.setProperty("messageid", ""+i);
+					msg.setProperty("messageid", "" + i++);
 					msg.setMessageId(java.util.UUID.randomUUID().toString());
 					msg.setExpiryTime(D2C_MESSAGE_TIMEOUT);
-					
 
 					EventCallback eventCallback = new EventCallback();
 					client.sendEventAsync(msg, eventCallback, msg);
-				}
 
-				catch (Exception e) {
+					Thread.sleep(100);
+				} catch (Exception e) {
 					e.printStackTrace(); // Trace the exception
 				}
-
 			}
+
+			log.info("Number of messages sent to IOTHub - " + i);
 			System.out.println("Wait for " + D2C_MESSAGE_TIMEOUT / 1000 + " second(s) for response from the IoT Hub...");
 
 			// Wait for IoT Hub to respond.

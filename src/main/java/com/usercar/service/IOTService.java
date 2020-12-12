@@ -1,7 +1,11 @@
 package com.usercar.service;
 
 import java.net.URISyntaxException;
+import java.util.UUID;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,14 +19,18 @@ import com.microsoft.azure.sdk.iot.device.IotHubClientProtocol;
 
 import lombok.extern.slf4j.Slf4j;
 
+import javax.annotation.PostConstruct;
+
+@RequiredArgsConstructor
 @Slf4j
 @Service
 public class IOTService {
-	
-	@Autowired
-	IOTSender iotSender;
-	
-	public void connect(int datamodelno) {
+
+	private final IOTSender iotSender;
+	private final SimulationEndKeeper simulationEndKeeper;
+	private ExecutorService executorService = Executors.newFixedThreadPool(10);
+
+	public String connect(int datamodelno) {
 		log.info("Starting...");
 		log.info("Beginning setup.");
 		int numRequests=200;
@@ -37,29 +45,26 @@ public class IOTService {
 		try {
 			client = new DeviceClient(connString, protocol);
 		} catch (IllegalArgumentException e2) {
-			
 			e2.printStackTrace();
 		} catch (URISyntaxException e2) {
 		
 			e2.printStackTrace();
 		}
 		log.info("Successfully created an IoT Hub client.");
-		switch(datamodelno)
-		{
-		case 1:
-			iotSender.sendMessageToIOTHUB(numRequests, client,new VehicleTripData());
-			break;
-		case 2:
-			iotSender.sendMessageToIOTHUB(numRequests, client,new VehicleEmissionData());
-			break;
-		case 3:
-			iotSender.sendMessageToIOTHUB(numRequests, client,new VehicleConditionData());
-			break;
-		case 4:
-			iotSender.sendMessageToIOTHUB(numRequests, client,new VehicleAllData());
-			break;
-		}
-		
+		String simulationId = UUID.randomUUID().toString();
+		runSimulation(datamodelno, numRequests, client, simulationId);
+
+		return simulationId;
 	}
+
+	public Boolean stopSimulation(String simulationId) {
+		simulationEndKeeper.endSimulation(simulationId);
+		return true;
+	}
+
+	private void runSimulation(int datamodelno, int numRequests, DeviceClient client, String simulationId) {
+		executorService.submit(new SimulationCallable(datamodelno, numRequests, client, simulationId, iotSender));
+	}
+
 
 }
