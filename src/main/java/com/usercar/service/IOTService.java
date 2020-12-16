@@ -35,7 +35,7 @@ public class IOTService {
 		log.info("Beginning setup.");
 		int numRequests=200;
 		String pathToCertificate = null;
-		String connString = "HostName=giciothub.azure-devices.net;DeviceId=giciotdevice;SharedAccessKey=SOaCbgQqpuheExFC6efzueLOojywcjOmuZAn8EPGhu4=";
+		String connString = "HostName=cartelemetryiot.azure-devices.net;DeviceId=cartelemetryiotdevice;SharedAccessKey=z+6jIVZIh6M0ai0i8itVeolXQ6qSdOndtUMNcEagbPc=";
 		//String connString ="HostName=iot-eventhub.azure-devices.net;DeviceId=dev1;SharedAccessKey=6o57ILHnYxDv1xYETcg2QrinmS52ppq4Y9n4kKoSAZI=";
 		IotHubClientProtocol protocol= IotHubClientProtocol.HTTPS;
 		String protocolStr = "https";
