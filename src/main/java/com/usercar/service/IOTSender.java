@@ -57,7 +57,7 @@ public class IOTSender {
 			// for (int i = 0; i < numRequests; ++i) {
 			while (!simulationEndKeeper.isSimulationEndRequested(simulationId) && MAX_SIMULATIONS > i) {
 				try {
-					Message msg = datagenerator.generateData();
+					Message msg = datagenerator.generateData(simulationId);
 					msg.setContentTypeFinal("application/json");
 					msg.setProperty("deviceid", deviceId);
 					msg.setProperty("messageid", "" + i++);

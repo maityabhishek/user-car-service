@@ -6,7 +6,7 @@ public class VehicleConditionData implements CarDataGenerator {
 
 	
 	@Override
-	public Message generateData()
+	public Message generateData(String simulationId)
 	{
 		String msgStr = "{\"coolanttemp\":" + ((int)(200*Math.random()%150)) +",\"usercase\":\"VehicleCondition\"" +",\"vin\":"+ ((int)(10000*Math.random()))+",\"engineload\":" + ((int)(100*Math.random()%100)) + "}";
 		Message msg = new Message(msgStr);

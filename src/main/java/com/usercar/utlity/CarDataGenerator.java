@@ -6,5 +6,5 @@ import com.microsoft.azure.sdk.iot.device.Message;
 
 @Service
 public interface CarDataGenerator {
-	public Message generateData();
+	public Message generateData(String simulationId);
 }

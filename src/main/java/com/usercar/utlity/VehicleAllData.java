@@ -16,7 +16,7 @@ public class VehicleAllData implements CarDataGenerator {
 
 	
 	@Override
-	public Message generateData() {
+	public Message generateData(String simulationId) {
 		RestTemplate res=new RestTemplate();
 		HttpHeaders headers = new HttpHeaders();
 	    headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));

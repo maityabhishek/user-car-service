@@ -1,13 +1,19 @@
 package com.usercar.service;
 
 import java.net.URISyntaxException;
+import java.util.Arrays;
 import java.util.UUID;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import com.usercar.service.IOTSender;
 import com.usercar.utlity.VehicleAllData;
@@ -59,6 +65,12 @@ public class IOTService {
 
 	public Boolean stopSimulation(String simulationId) {
 		simulationEndKeeper.endSimulation(simulationId);
+		//call to analytics service
+		RestTemplate res=new RestTemplate();
+		HttpHeaders headers = new HttpHeaders();
+	    headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+	    HttpEntity <String> entity = new HttpEntity<String>(headers);
+		String msgStr= res.exchange("localhost:8080/analyze/"+simulationId, HttpMethod.GET, entity, String.class).getBody();
 		return true;
 	}
 

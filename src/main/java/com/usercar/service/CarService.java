@@ -1,5 +1,6 @@
 package com.usercar.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -145,6 +146,14 @@ public class CarService {
 		{
 			return new UserCarRes(0,false,"internal error");
 		}
+		
+	}
+	public boolean addCarTripInternal(String carno,String startpoint,String endpoint)
+	{
+			cartrip.count();
+			Trip t= new Trip((int) (cartrip.count()+1),carno,0.0,0.0,0.0,0.0,startpoint,endpoint,(new Date()),0,null);
+			cartrip.save(t);
+			return true;
 		
 	}
 	public CarSummary viewCar(String token,String carno)
