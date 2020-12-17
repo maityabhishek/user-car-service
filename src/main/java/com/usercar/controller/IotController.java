@@ -20,7 +20,7 @@ public class IotController {
 
     @RequestMapping(path = "/senddata/trip/{carno}/{startPoint}/{endPoint}", method = RequestMethod.GET)
     public ResponseEntity<SimulationResponse> sendTripData(@PathVariable("startPoint") String startPoint,
-                                                           @PathVariable("startPoint") String endPoint,
+                                                           @PathVariable("endPoint") String endPoint,
                                                            @PathVariable("carno") String carno) {
         SimulationResponse response = new SimulationResponse();
         try {

@@ -41,8 +41,8 @@ public class IOTService {
 		log.info("Beginning setup.");
 		int numRequests=200;
 		String pathToCertificate = null;
-		String connString = "HostName=cartelemetryiot.azure-devices.net;DeviceId=cartelemetryiotdevice;SharedAccessKey=z+6jIVZIh6M0ai0i8itVeolXQ6qSdOndtUMNcEagbPc=";
-		//String connString ="HostName=iot-eventhub.azure-devices.net;DeviceId=dev1;SharedAccessKey=6o57ILHnYxDv1xYETcg2QrinmS52ppq4Y9n4kKoSAZI=";
+		//String connString = "HostName=cartelemetryiot.azure-devices.net;DeviceId=cartelemetryiotdevice;SharedAccessKey=z+6jIVZIh6M0ai0i8itVeolXQ6qSdOndtUMNcEagbPc=";
+		String connString ="HostName=iot-eventhub.azure-devices.net;DeviceId=dev1;SharedAccessKey=6o57ILHnYxDv1xYETcg2QrinmS52ppq4Y9n4kKoSAZI=";
 		IotHubClientProtocol protocol= IotHubClientProtocol.HTTPS;
 		String protocolStr = "https";
 		log.info("Successfully read input parameters.");
@@ -70,7 +70,7 @@ public class IOTService {
 		HttpHeaders headers = new HttpHeaders();
 	    headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
 	    HttpEntity <String> entity = new HttpEntity<String>(headers);
-		String msgStr= res.exchange("localhost:8080/analyze/"+simulationId, HttpMethod.GET, entity, String.class).getBody();
+		String msgStr= res.exchange("http://localhost:8080/analyze/"+simulationId, HttpMethod.GET, entity, String.class).getBody();
 		return true;
 	}
 
