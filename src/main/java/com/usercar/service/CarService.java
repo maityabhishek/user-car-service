@@ -201,6 +201,32 @@ public class CarService {
 		return cartrip.findByCarnoAndTripid(carno, list.size());
 	}
 	
+	public boolean updateKmandFuel(String token,String carno,int kms,double fuel)
+	{
+		try
+		{
+			if(token.equals("@uthtoken"))
+			{
+				Car c=cardao.findById(carno).orElse(null);
+				if(c!=null)
+				{
+					c.setTotalkms(c.getTotalkms()+kms);
+					c.setFuel(c.getFuel()-fuel);
+					cardao.save(c);
+				}
+				else
+					throw new Exception("invalid auth token");
+			}
+			else
+				throw new Exception("invalid auth token");
+		}
+		catch (Exception e)
+		{
+			return false;
+		}
+		return true;
+	}
+	
 	public AnalyticData viewAnalyticInfo(String carno) {
 		return null;
 	}

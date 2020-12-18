@@ -78,6 +78,14 @@ public class CarController {
 	{
 		return new ResponseEntity<>(carservice.viewlastTrip(carno),HttpStatus.OK);
 	}
+	@RequestMapping(method=RequestMethod.GET,path="/updateinfos/{carno}/{kms}/{fuel}")
+	public ResponseEntity<?> updateKmAndFuel(@PathVariable("carno")String carno, @RequestHeader(name="Authorization")String token,
+											@PathVariable("kms")int kms,
+											@PathVariable("fuel")double fuel)
+	{
+		
+		return new ResponseEntity<>(carservice.updateKmandFuel(token, carno, kms, fuel),HttpStatus.OK);
+	}
 	
 	/**
 	 * This method retrieve analytics information
