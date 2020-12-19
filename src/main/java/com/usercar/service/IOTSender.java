@@ -23,7 +23,7 @@ import com.microsoft.azure.sdk.iot.device.transport.IotHubConnectionStatus;
 @Slf4j
 public class IOTSender {
 
-	private static final int MAX_SIMULATIONS = 10000;
+	private static final int MAX_SIMULATIONS = 500;
 	private static final int D2C_MESSAGE_TIMEOUT = 200000;   // 2 seconds
 	private static List failedMessageListOnClose = new ArrayList(); // List of messages that failed on close
 
