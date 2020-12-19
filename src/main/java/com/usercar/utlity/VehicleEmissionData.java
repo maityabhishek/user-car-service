@@ -1,6 +1,7 @@
 package com.usercar.utlity;
 
 import com.microsoft.azure.sdk.iot.device.Message;
+import java.util.Random;
 
 public class VehicleEmissionData implements CarDataGenerator {
 	
