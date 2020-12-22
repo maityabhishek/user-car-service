@@ -18,7 +18,7 @@ public class VehicleEmissionData implements CarDataGenerator {
 		int high1 = 70;
 		int nolevel = r1.nextInt(high1-low1) + low1;
 				
-		String msgStr = "{\"co2level\":"+ co2level +",\"usercase\":\"VehicleEmission\"" +",\"nolevel\":"+ nolevel + ",\"vin\":"+ ((int)(10000*Math.random()))+"}";
+		String msgStr = "{\"co2level\":"+ co2level +",\"usercase\":\"VehicleEmission\"" +",\"nolevel\":"+ nolevel + ",\"vin\":"+ (100)+"}";
 		Message msg = new Message(msgStr);
 		System.out.println(msgStr);
 		return msg;
