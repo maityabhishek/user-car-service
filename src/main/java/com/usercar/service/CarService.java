@@ -151,7 +151,7 @@ public class CarService {
 	public boolean addCarTripInternal(String carno,String startpoint,String endpoint)
 	{
 			cartrip.count();
-			Trip t= new Trip((int) (cartrip.count()+1),carno,0.0,0.0,0.0,0.0,startpoint,endpoint,(new Date()),0,null);
+			Trip t= new Trip((int) (cartrip.count()+1),carno,0.0,0.0,0.0,0.0,startpoint,endpoint,(new Date()),null,0,0,0.0);
 			cartrip.save(t);
 			return true;
 		
@@ -198,7 +198,7 @@ public class CarService {
 	public Trip viewlastTrip(String carno)
 	{
 		List<Trip> list= viewTrip(carno);
-		return cartrip.findByCarnoAndTripid(carno, list.size());
+		return cartrip.findByTripidAndCarno(list.size(),carno);
 	}
 	
 	public boolean updateKmandFuel(String token,String carno,int kms,double fuel)

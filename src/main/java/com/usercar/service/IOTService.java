@@ -70,7 +70,7 @@ public class IOTService {
 		HttpHeaders headers = new HttpHeaders();
 	    headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
 	    HttpEntity <String> entity = new HttpEntity<String>(headers);
-		String msgStr= res.exchange("https://car-trip-analytics.azurewebsites.net/analyze/"+simulationId, HttpMethod.GET, entity, String.class).getBody();
+		res.exchange("https://car-trip-analytics.azurewebsites.net/analyze/"+simulationId, HttpMethod.GET, entity, String.class).getBody();
 		return true;
 	}
 

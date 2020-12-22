@@ -41,12 +41,12 @@ class cosmosdb
 		List<TripSplits> ts= new ArrayList<TripSplits>();
 		ts.add(new TripSplits(1,10,10.2,15,1));
 		ts.add(new TripSplits(11,20,10.2,15,1));
-		cartrip.save(new Trip(1,"OD02F7497", 658.3, 30.2, 45.3, 3.1,"Mumbai","Pune",new Date(),10,ts));
+		cartrip.save(new Trip(1,"OD02F7497", 658.3, 30.2, 45.3, 3.1,"Mumbai","Pune",new Date(),ts,0,0,0.0));
 		ts= new ArrayList<TripSplits>();
 		ts.add(new TripSplits(1,10,10.2,15,1));
 		ts.add(new TripSplits(11,20,10.2,15,1));
 		ts.add(new TripSplits(21,31,10.2,15,1));
-		cartrip.save(new Trip(2,"OD02F7497", 1658.3, 60.2, 93.3, 7.1,"Delhi","Pune",new Date(),10,ts));
+		cartrip.save(new Trip(2,"OD02F7497", 1658.3, 60.2, 93.3, 7.1,"Delhi","Pune",new Date(),ts,10,0,0.0));
 	}
 }
 
