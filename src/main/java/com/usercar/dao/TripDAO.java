@@ -8,7 +8,7 @@ import com.usercar.model.Trip;
 
 public interface TripDAO extends MongoRepository<Trip, Integer> {
 
-	List<Trip> findAllByCarno(String Carno);
+	List<Trip> findAllByCarnoOrderByTripidDesc(String Carno);
 	Trip findByCarnoAndTripid(String Carno,int Tripid);
 	Trip findByTripidAndCarno(int Tripid,String Carno);
 }

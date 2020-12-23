@@ -163,7 +163,7 @@ public class CarService {
 			{
 				CarSummary cs=new CarSummary();
 				cs.setCar(cardao.findById(carno).orElse(null));
-				cs.setTriplist(cartrip.findAllByCarno(carno));
+				cs.setTriplist(cartrip.findAllByCarnoOrderByTripidDesc(carno));
 				cs.setCarserv(carservdao.findAllByCarno(carno));
 				cs.setPuclist(carpucdao.findAllByCarno(carno));
 				return cs;
@@ -193,7 +193,7 @@ public class CarService {
 	}
 
 	public List<Trip> viewTrip(String carno) {
-		return cartrip.findAllByCarno(carno);
+		return cartrip.findAllByCarnoOrderByTripidDesc(carno);
 	}
 	public Trip viewlastTrip(String carno)
 	{
